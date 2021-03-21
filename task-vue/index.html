@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leng</title>
+
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    
+    <div id="app">
+        <div class="page">
+            <h1>Leng</h1>
+            <hr>
+    
+            <div class="runing">
+                <h3>Running</h3>
+                <p>{{ runningTips }}</p>
+            </div>
+            <hr>
+    
+            <h2>ADD</h2>
+            <div class="add">
+                <div class="add-task">
+                    <div class="sel">
+                        <label for="model-sel">type</label>
+                        <select name="model" id="model-sel" v-model="addTaskInfo.model">
+                            <option v-for="model in taskInfo.models" :value="model.value">{{ model.key }}</option>
+                        </select>
+                    </div>
+                    <div class="sel">
+                        <label for="team-sel">team</label>
+                        <select name="team" id="team-sel" v-model="addTaskInfo.team">
+                            <option v-for="team in taskInfo.teams" :value="team.value">{{ team.key }}</option>
+                        </select>
+                    </div>
+                    <div class="sel">
+                        <label for="branch-sel">branch</label>
+                        <select name="branch" id="branch-sel" v-model="addTaskInfo.branch">
+                            <option v-for="branch in taskInfo.branchs" :value="branch.value">{{ branch.key }}</option>
+                        </select>
+                    </div>
+                </div>
+                <button @click="addTask">add</button>
+            </div>
+            <button @click="refreshTaskInfo">refresh</button>
+            <hr>
+    
+            <div class="queue">
+                <h3>TODO</h3>
+                <div v-for="task in queueTasks">
+                    <span>{{ task }}</span>
+                    <button @click="delTask(task)"> del </button>
+                </div>
+            </div>
+            <hr>
+    
+            <div class="done">
+                <h3>DONE</h3>
+                <div v-for="task in doneList"></div>
+            </div>
+        </div>
+
+        <div id="mask" @click="closeLogin" v-if="showLogin">
+            <div @click.stop="" class="login">
+                <h1>Login</h1>
+                <input type="text" placeholder="username" v-model="loginInfo.usr">
+                <input type="password" placeholder="password" v-model="loginInfo.pwd">
+                <button @click="login">Login</button>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="./js/vue.min.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
